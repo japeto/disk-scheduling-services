@@ -10,6 +10,7 @@ from sstf import sstf
 from scan import scan
 from cscan import cscan
 from look import look
+from clook import clook
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -58,6 +59,8 @@ def sched():
     result = cscan(tracks, arm, requests)
   elif algorithm == 5:
     result = look(tracks, arm, requests)
+  elif algorithm == 6:
+    result = clook(tracks, arm, requests)
   else:
     return jsonify({"error": "Invalid algorithm"}), 400
   
