@@ -1,6 +1,6 @@
 def sstf(arm_position, lrequests, debug=False):
   """
-  First Come First Serve implementation
+  Shortest Seek Time First
 
   Args:
       arm_position (int): arm position
@@ -17,12 +17,12 @@ def sstf(arm_position, lrequests, debug=False):
 
   for i in range(n):
     if (i == 0):
-      menor_diferencia = min(lrequests, key=lambda x: abs(x - arm_position))
+      smallest_difference = min(lrequests, key=lambda x: abs(x - arm_position))
     else:
-      menor_diferencia = min(lrequests, key=lambda x: abs(x - request[-1]))
+      smallest_difference = min(lrequests, key=lambda x: abs(x - request[-1]))
 
-    request.append(menor_diferencia)
-    lrequests.remove(menor_diferencia)
+    request.append(smallest_difference)
+    lrequests.remove(smallest_difference)
 
   for a_request in request:
     distance += abs(a_request-current_pos)

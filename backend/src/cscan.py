@@ -1,4 +1,13 @@
 def cscan(tracks, arm_position, lrequests, debug=False):
+  """
+  Elevator Algorithm
+
+  Args:
+      tracks (int) : number of cylinders
+      arm_position (int): arm position
+      lrequests (list<int>): request list
+  """
+
   distance=0
   n = len(lrequests)
   current_pos = arm_position
