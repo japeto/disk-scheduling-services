@@ -1,5 +1,3 @@
-from heapq import *
-
 def fcfs(arm_position, lrequests, debug=False):
   """
   First Come First Serve implementation
