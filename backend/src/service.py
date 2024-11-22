@@ -8,6 +8,8 @@ CORS(app)
 from fcfs import fcfs
 from sstf import sstf
 from scan import scan
+from cscan import cscan
+from look import look
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -52,6 +54,10 @@ def sched():
     result = sstf(arm, requests)
   elif algorithm == 3:
     result = scan(tracks, arm, requests)
+  elif algorithm == 4:
+    result = cscan(tracks, arm, requests)
+  elif algorithm == 5:
+    result = look(tracks, arm, requests)
   else:
     return jsonify({"error": "Invalid algorithm"}), 400
   
@@ -64,5 +70,5 @@ def sched():
 
   
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=8000)
+  app.run(host="0.0.0.0", port=8000, debug=True)
 

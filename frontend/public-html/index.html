@@ -86,7 +86,8 @@
           document.getElementById('result').innerHTML = `
             <p><b>Sequence:</b> ${result.sequence.join(", ")}<br/>
               <b>Distance:</b> ${result.distance}<br/>
-              <b>Average:</b> ${result.average}</p>
+              <b>Average:</b> ${result.average}<br/>
+              <b>Ignored Requests:</b> ${result.ignored.join(", ")}</p><br/>
           `;
         } else {
           document.getElementById('result').innerHTML = `<p>Error: ${response.statusText}</p>`;
