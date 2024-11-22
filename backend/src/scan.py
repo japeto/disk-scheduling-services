@@ -3,10 +3,10 @@ def scan(tracks, arm_position, lrequests, debug=False):
   n = len(lrequests)
   current_pos = arm_position
 
-  olders = [x for x in lrequests if x > tracks]
+  olders = [x for x in lrequests if x > arm_position]
   olders.sort()
 
-  minors = [x for x in lrequests if x < tracks]
+  minors = [x for x in lrequests if x < arm_position]
   minors.sort(reverse=True)
 
   request = olders + [tracks] + minors

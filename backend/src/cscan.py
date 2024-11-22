@@ -5,8 +5,8 @@ def cscan(tracks, arm_position, lrequests, debug=False):
 
   lrequests.sort()
 
-  olders = [x for x in lrequests if x > tracks]
-  minors = [x for x in lrequests if x < tracks]
+  olders = [x for x in lrequests if x > arm_position]
+  minors = [x for x in lrequests if x < arm_position]
 
   request = olders + [tracks] + [0] + minors
 
