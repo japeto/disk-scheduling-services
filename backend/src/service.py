@@ -8,6 +8,7 @@ CORS(app)
 from fcfs import fcfs
 from sstf import sstf
 from clook import clook
+from cscan import cscan
 
 
 @app.route("/", methods=['GET'])
@@ -51,6 +52,12 @@ def sched():
     result = fcfs(arm, requests)
   elif algorithm == 2:
     result = sstf(arm, requests)
+  elif algorithm == 4:
+    rTracks = tracks - 1
+    if any(n > rTracks for n in requests):
+      return jsonify({"error": "requests contain a request higher than the maximun tracks allowed"}), 400
+    else:
+      result = cscan(arm, requests, tracks)
   elif algorithm == 6:
     result = clook(arm, requests)
   else:
