@@ -1,3 +1,30 @@
+
+## Overview
+
+This project simulates the following disk scheduling algorithms:
+- **FCFS (First Come, First Served)**
+- **SSTF (Shortest Seek Time First)**
+- **SCAN**
+- **C-SCAN**
+- **LOOK**
+- **C-LOOK**
+
+Users can interact with the API through JSON payloads or upload `.txt` files with predefined formats.
+
+---
+
+## Disk Scheduling Algorithms
+
+1. **FCFS (First Come, First Served):** Requests are served in the order they arrive.
+2. **SSTF (Shortest Seek Time First):** The request closest to the current head position is served first.
+3. **SCAN:** The disk arm moves in one direction, serving requests until it reaches the end, then reverses.
+4. **C-SCAN:** The disk arm moves in one direction, serving requests, then jumps back to the beginning.
+5. **LOOK:** Similar to SCAN but only goes as far as the furthest request in each direction.
+6. **C-LOOK:** Similar to C-SCAN but jumps back to the start of the furthest request, skipping unused cylinders.
+
+---
+
+
 # Run backend component
 
 ## Without Docker (development mode)
