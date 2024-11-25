@@ -6,22 +6,32 @@ Here, an Nginx proxy is set up to route requests to a scheduling service, which 
 
 The project follows this structure:
 
-```graphql
-disk-scheduling-services/
-├── docker-compose.yml
-├── backend/
-│   ├── Dockerfile
-│   ├── src/  # Service code
-│   ├── ...   # Other files
-├── frontend/
-│   ├── Dockerfile
-│   ├── public-html/  # HTML code
-│   ├── ...   # Other files
-├── proxy/
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   ├── ...   # Other files
 ```
+.
+├── backend/
+│   ├── inputs/            # Input files folder
+│   ├── src/               # Backend source code
+│   │   ├── service.py    # Main Flask application
+│   │   ├── fcfs.py       # FCFS algorithm implementation
+│   │   ├── sstf.py       # SSTF algorithm implementation
+│   │   ├── scan.py       # SCAN algorithm implementation
+│   │   ├── cscan.py      # C-SCAN algorithm implementation
+│   │   ├── look.py       # LOOK algorithm implementation
+│   │   ├── clook.py      # C-LOOK algorithm implementation
+│   ├── requirements.txt  # Python dependencies
+│   ├── Dockerfile        # Backend Dockerfile
+│   ├── ...               # Other files 
+├── frontend/
+│   ├── public-html/      # Frontend source code
+│   ├── Dockerfile        # Frontend Dockerfile
+│   ├── ...               # Other files 
+├── proxy/
+│   ├── nginx              
+│   ├── ...               # Other files      
+├── docker-compose.yml    # Docker Compose configuration
+
+```
+
 
 ## How to Run the Project
 
