@@ -4,98 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Disk Scheduling Simulator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    label, select, input {
-      display: block;
-      margin-top: 10px;
-    }
-    button {
-      margin-top: 20px;
-    }
-    #result {
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid #fafbfd;
-      border-radius: 2pt;
-      background-color: #f5f5f5;
-      height: 50vh;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
+    <h1>Disk Scheduling Simulator</h1>
 
-  <h1>Disk Scheduling Simulator</h1>
-  <form id="schedForm">
-    <label for="algorithm">Algorithm:</label>
-    <select id="algorithm" required>
-      <option value="1">FIFO (FCFS)</option>
-      <option value="2">SSTF</option>
-      <option value="3">SCAN</option>
-      <option value="4">CSCAN</option>
-      <option value="5">LOOK</option>
-      <option value="6">CLOOK</option>
-    </select>
+    <!-- Formulario completo -->
+    <form id="diskSchedulerForm">
+      <!-- Título -->
+      <div class="section">
+        <h3>Select Input File from Server</h3>
+        <label for="serverFile">Available Files:</label>
+        <select id="serverFile"></select>
+        <button type="button" class="btn" onclick="loadServerFile()">Load File Data (Click to refresh) </button>
+      </div>
 
-    <label for="tracks">Tracks:</label>
-    <input type="number" id="tracks" required placeholder="e.g., 200" />
+      <div class="section">
+        <h3>Upload a Local File</h3>
+        <label for="localFile">Select Local File:</label>
+        <input type="file" id="localFile" accept=".txt">
+        <button type="button" class="btn" onclick="loadLocalFile()">Load Local File (Click to refresh)</button>
+      </div>
 
-    <label for="arm">Initial Position (arm):</label>
-    <input type="number" id="arm" required placeholder="e.g., 96" />
+      <div class="section">
+        <h3>Manual Input</h3>
+        <label for="algorithm">Algorithm:</label>
+        <select id="algorithm" required>
+          <option value="1">FIFO (FCFS)</option>
+          <option value="2">SSTF</option>
+          <option value="3">SCAN</option>
+          <option value="4">CSCAN</option>
+          <option value="5">LOOK</option>
+          <option value="6">CLOOK</option>
+        </select>
 
-    <label for="requests">Requests (comma-separated):</label>
-    <input type="text" id="requests" required placeholder="e.g., 125,17,23,67,90,128,189,115,97" />
+        <label for="tracks">Tracks:</label>
+        <input type="number" id="tracks" required placeholder="e.g., 200">
 
-    <button type="button" onclick="sendRequest()">Submit</button>
-  </form>
+        <label for="iorequest">Number of I/O Requests:</label>
+        <input type="number" id="iorequest" required placeholder="e.g., 9">
 
-  <div id="result"></div>
+        <label for="arm">Initial Position (arm):</label>
+        <input type="number" id="arm" required placeholder="e.g., 96">
 
-  <script>
-    async function sendRequest() {
-      const algorithm = parseInt(document.getElementById('algorithm').value);
-      const tracks = parseInt(document.getElementById('tracks').value);
-      const arm = parseInt(document.getElementById('arm').value);
-      const requests = document.getElementById('requests').value
-        .split(',')
-        .map(Number)
-        .filter(n => !isNaN(n));
+        <label for="requests">Requests (comma-separated):</label>
+        <input type="text" id="requests" required placeholder="e.g., 125,17,23,67,90,128,189,115,97">
 
-      const payload = {
-        algorithm: algorithm,
-        tracks: tracks,
-        arm: arm,
-        requests: requests
-      };
+        <button type="button" class="btn btn-submit" onclick="sendRequest()">Submit</button>
+      </div>
+    </form>
 
-      try {
-        const response = await fetch('http://127.0.0.1:8000/sched', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+    <div id="result" class="result"></div>
+  </div>
 
-        if (response.ok) {
-          const { result } = await response.json();
-          console.log("result ", result);
-          document.getElementById('result').innerHTML = `
-            <p><b>Sequence:</b> ${result.sequence.join(", ")}<br/>
-              <b>Distance:</b> ${result.distance}<br/>
-              <b>Average:</b> ${result.average}</p>
-          `;
-        } else {
-          document.getElementById('result').innerHTML = `<p>Error: ${response.statusText}</p>`;
-        }
-      } catch (error) {
-        document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
-      }
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
