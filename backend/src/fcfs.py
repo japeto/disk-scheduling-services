@@ -23,4 +23,4 @@ def fcfs(arm_position, lrequests, debug=False):
     "distance": distance,
   }
 
-# print(fcfs(96, [125,17,23,67,90,128,189,115,97]))
+#print(fcfs(96, [125,17,23,67,90,128,189,115,97]))
