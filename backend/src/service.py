@@ -1,11 +1,15 @@
 from flask import Flask, request, jsonify
-
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
 from fcfs import fcfs
+from clook import clook
+from cscan import cscan
+from look import look
+from scan import scan
+from sstf import sstf
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -44,19 +48,23 @@ def sched():
   arm = data.get("arm")
   requests = data.get("requests")
   
-  if algorithm == 1:  ## FCFS
+  if algorithm == 1:  
     result = fcfs(arm, requests)
+  elif algorithm == 2:
+    result = sstf(arm, requests)
+  elif algorithm == 3:
+    result = scan(arm, requests,tracks)
+  elif algorithm == 4:
+    result = cscan(arm, requests,tracks)
+  elif algorithm == 5:
+    result = look(arm, requests)
+  elif algorithm == 6:
+    result = clook(arm, requests)
   else:
-    return jsonify({"error": "Invalid algorithm"}), 400
-  
+    return jsonify({"error": "Invalid algorithm"}), 400 
   return jsonify({
     "result": result
   }), 200
-    
-  
-  
-
   
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=8000)
-

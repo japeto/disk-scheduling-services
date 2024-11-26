@@ -1,13 +1,7 @@
 from heapq import *
 
 def fcfs(arm_position, lrequests, debug=False):
-  """
-  First Come First Serve implementation
 
-  Args:
-      arm_position (int): arm position
-      lrequests (list<int>): request list
-  """
   distance=0
   n=len(lrequests)
   current_pos=arm_position
@@ -22,5 +16,3 @@ def fcfs(arm_position, lrequests, debug=False):
     "average": average,
     "distance": distance,
   }
-
-# print(fcfs(96, [125,17,23,67,90,128,189,115,97]))
