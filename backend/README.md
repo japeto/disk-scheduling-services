@@ -71,7 +71,7 @@ docker run --name simbackend -d -p 0.0.0.0:8000:8000 japeto/simbackend
 Open your browser and navigate to:
 
 ```plaintext
-http://localhost:8000
+
 ```
 
 ## Unisg Docker Compose
