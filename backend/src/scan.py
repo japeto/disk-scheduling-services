@@ -1,7 +1,7 @@
 def scan(arm_position, lrequests, tracks, debug=False):
     distance = 0
     sequence = []
-    lrequests.extend([0, tracks])
+    lrequests.extend([0, tracks - 1])
     requests = sorted(lrequests)
     current_pos = arm_position
     # Going in one direction first
@@ -25,3 +25,5 @@ def scan(arm_position, lrequests, tracks, debug=False):
         "average": average,
         "distance": distance,
     }
+
+# print(scan(120, [45,133,86,200,42,176,95,140], 250))

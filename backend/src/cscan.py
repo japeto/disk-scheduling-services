@@ -1,6 +1,7 @@
 def cscan(arm_position, lrequests, tracks, debug=False):
     distance = 0
     sequence = []
+    lrequests.extend([0, tracks - 1])
     requests = sorted(lrequests)
     current_pos = arm_position
     # Going in one direction
@@ -25,3 +26,5 @@ def cscan(arm_position, lrequests, tracks, debug=False):
         "average": average,
         "distance": distance,
     }
+
+print(cscan(140, [10,160,50,90,120,45,80], 180))
