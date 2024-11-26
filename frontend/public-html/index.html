@@ -31,7 +31,7 @@
   <h1>Disk Scheduling Simulator</h1>
   <form id="schedForm">
     <label for="algorithm">Algorithm:</label>
-    <select id="algorithm" required>
+    <select id="algorithm" required onchange="toggleDirection()">
       <option value="1">FIFO (FCFS)</option>
       <option value="2">SSTF</option>
       <option value="3">SCAN</option>
@@ -39,6 +39,14 @@
       <option value="5">LOOK</option>
       <option value="6">CLOOK</option>
     </select>
+
+    <div id="directionField" style="display: none;">
+      <label for="direction">Direction:</label>
+      <select id="direction">
+        <option value="right">Right</option>
+        <option value="left">Left</option>
+      </select>
+    </div>
 
     <label for="tracks">Tracks:</label>
     <input type="number" id="tracks" required placeholder="e.g., 200" />
@@ -55,6 +63,16 @@
   <div id="result"></div>
 
   <script>
+    function toggleDirection() {
+      const algorithm = parseInt(document.getElementById('algorithm').value);
+      const directionField = document.getElementById('directionField');
+      if (algorithm === 3 || algorithm === 5) { 
+        directionField.style.display = "block";
+      } else {
+        directionField.style.display = "none";
+      }
+    }
+
     async function sendRequest() {
       const algorithm = parseInt(document.getElementById('algorithm').value);
       const tracks = parseInt(document.getElementById('tracks').value);
@@ -71,6 +89,10 @@
         requests: requests
       };
 
+      if (algorithm === 3 || algorithm === 5) { 
+        payload.direction = document.getElementById('direction').value;
+      }
+
       try {
         const response = await fetch('http://127.0.0.1:8000/sched', {
           method: 'POST',
@@ -82,7 +104,6 @@
 
         if (response.ok) {
           const { result } = await response.json();
-          console.log("result ", result);
           document.getElementById('result').innerHTML = `
             <p><b>Sequence:</b> ${result.sequence.join(", ")}<br/>
               <b>Distance:</b> ${result.distance}<br/>
@@ -99,3 +120,4 @@
 
 </body>
 </html>
+
