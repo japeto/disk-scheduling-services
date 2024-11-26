@@ -1,6 +1,7 @@
 def scan(arm_position, lrequests, tracks, debug=False):
     distance = 0
     sequence = []
+    lrequests.extend([0, tracks])
     requests = sorted(lrequests)
     current_pos = arm_position
     # Going in one direction first
