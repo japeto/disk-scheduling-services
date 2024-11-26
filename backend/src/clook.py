@@ -18,11 +18,16 @@ def clook(arm, requests):
         distance += abs(arm - r)
         arm = r
         sequence.append(r)
-    for r in left:
-        distance += abs(arm - r)
-        arm = r
-        sequence.append(r)
-    
+
+    if left:
+      distance += abs(arm - left[0]) 
+      arm = left[0]
+
+      for r in left:
+          distance += abs(arm - r)
+          arm = r
+          sequence.append(r)
+     
     average = distance / num_requests
     return {
     "sequence": [initial_arm] + sequence,
