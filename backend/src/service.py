@@ -9,7 +9,7 @@ CORS(app)
 from fcfs import fcfs
 from sstf import sstf  
 from scan import scan
-from look import look
+
 
 @app.route("/", methods=['GET'])
 def hello():
