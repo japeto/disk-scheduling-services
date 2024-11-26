@@ -3,7 +3,7 @@ def clook(arm, requests):
     C-LOOK algorithm.
     Args:
         requests: List of track numbers to service.
-        head: Initial position of the disk arm.
+        arm: Initial position of the disk arm.
     """
     sequence = []
     distance = 0
