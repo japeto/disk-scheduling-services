@@ -1,0 +1,84 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from fcfs import fcfs
+from sstf import sstf
+from scan import scan
+from cscan import cscan
+from look import look
+from clook import clook
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/", methods=['GET'])
+def hello():
+    return jsonify({
+        "message": "use /usage to get information"
+    })
+
+@app.route("/usage", methods=['GET'])
+def help():
+    return jsonify({
+        "message": "use FIFO, SSTF, SCAN or CSCAN algorithms",
+        "instructions": {
+            "endpoint": "/sched",
+            "method": "POST",
+            "payload": {
+                "algorithm": "1:FCFS, 2:SSTF, 3:SCAN, 4:CSCAN, 5:LOOK, 6:CLOOK",
+                "tracks": "number of cylinders",
+                "arm": "initial position",
+                "requests": "list of tracks"
+            },
+            "payload_example": {
+                "algorithm": 1,
+                "tracks": 200,
+                "arm": 96,
+                "requests": [125, 17, 23, 67, 90, 128, 189, 115, 97]
+            },
+            "description": "This endpoint performs disk scheduling algorithms"
+        }
+    })
+
+@app.route("/sched", methods=['POST'])
+def sched():
+    data = request.get_json()
+
+    # Validación de datos de entrada
+    algorithm = data.get("algorithm")
+    if not algorithm or algorithm not in [1, 2, 3, 4, 5, 6]:
+        return jsonify({"error": "Invalid algorithm. Must be 1-6."}), 400
+    
+    tracks = data.get("tracks")
+    if not isinstance(tracks, int) or tracks <= 0:
+        return jsonify({"error": "Invalid tracks number. Must be a positive integer."}), 400
+    
+    arm = data.get("arm")
+    if not isinstance(arm, int):
+        return jsonify({"error": "Invalid arm position. Must be an integer."}), 400
+    
+    requests = data.get("requests")
+    if not isinstance(requests, list) or not all(isinstance(r, int) for r in requests):
+        return jsonify({"error": "Invalid requests. Must be a list of integers."}), 400
+    
+    # Procesar algoritmo
+    if algorithm == 1:  # FCFS
+        result = fcfs(arm, requests)
+    elif algorithm == 2:  # SSTF
+        result = sstf(arm, requests)
+    elif algorithm == 3:  # SCAN
+        result = scan(arm, requests, tracks)
+    elif algorithm == 4:  # CSCAN
+        result = cscan(arm, requests, tracks)
+    elif algorithm == 5:  # LOOK
+        result = look(arm, requests)
+    elif algorithm == 6:  # CLOOK
+        result = clook(arm, requests)
+    else:
+        return jsonify({"error": "Algorithm not implemented yet"}), 501  # Implementar más algoritmos si es necesario
+
+    return jsonify({
+        "result": result
+    }), 200
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=800
