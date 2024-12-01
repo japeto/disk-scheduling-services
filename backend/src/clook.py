@@ -2,7 +2,7 @@ from heapq import *
 
 def clook(arm_position, lrequests, tracks, debug=False):
     """
-    C-SCAN (Circular SCAN) implementation with disk size consideration.
+    C-LOOK (Circular LOOK)
 
     Args:
         arm_position (int): arm position

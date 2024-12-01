@@ -59,7 +59,7 @@ def sched():
     result = cscan(arm, requests, tracks)
   elif algorithm == 5: ## LOOK
     result = look(arm, requests, tracks)
-  elif algorithm == 6: ## CLOOK
+  elif algorithm == 6: ## C-LOOK
     result = clook(arm, requests, tracks)
   else:
     return jsonify({"error": "Invalid algorithm"}), 400

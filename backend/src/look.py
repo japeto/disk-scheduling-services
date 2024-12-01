@@ -2,7 +2,7 @@ from heapq import *
 
 def look(arm_position, lrequests, tracks, debug=False):
     """
-    SCAN (Elevator Algorithm) implementation with disk size consideration.
+    LOOK
 
     Args:
         arm_position (int): arm position
