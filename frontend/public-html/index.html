@@ -97,12 +97,10 @@
       }
     }
     function loadJSON() {
-      // Crear un input de tipo file para que el usuario seleccione un archivo JSON
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = '.json';
 
-      // Evento para leer el archivo
       input.addEventListener('change', function(event) {
         const file = event.target.files[0];
         
@@ -123,13 +121,10 @@
         }
       });
 
-      // Abrir el cuadro de diálogo para seleccionar un archivo
       input.click();
     }
 
-    // Función para llenar el formulario con los datos del archivo JSON
     function fillForm(data) {
-      // Asignar los valores leídos del archivo JSON a los campos del formulario
       document.getElementById('algorithm').value = data.algorithm || '';
       document.getElementById('tracks').value = data.tracks || '';
       document.getElementById('arm').value = data.arm || '';
