@@ -1,0 +1,7 @@
+{
+    "algorithm": 3,
+    "tracks": 230,
+    "number of requests": 9,
+    "arm": 90,
+    "requests":[200,40,110,75,140,180,20,150,60]
+}

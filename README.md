@@ -1,3 +1,5 @@
+Leonardo Rios - 2310129 Laura Celeste Berrio - 2322101 Juan Pablo Montealegre - 2310041
+
 # Disk scheduling algorithms
 
 Here, an Nginx proxy is set up to route requests to a scheduling service, which is responsible for handling different policies. This ensures efficient routing and load balancing between services.
@@ -12,15 +14,30 @@ disk-scheduling-services/
 ├── backend/
 │   ├── Dockerfile
 │   ├── src/  # Service code
-│   ├── ...   # Other files
+│   │   ├──service.py
+│   │   ├──fcfs.py
+│   │   ├──sstf.py
+│   │   ├──scan.py
+│   │   ├──cscan.py
+│   │   ├──look.py
+│   │   ├──clook.py
+│   ├── inputs   # Other files
+│   │   ├──dsa001.json
+│   │   ├──dsa002.json
+│   │   ├──dsa003.json
+│   │   ├──dsa004.json
+│   │   ├──dsa005.json
+│   │   ├──dsa006.json
+│   │   ├──dsa007.json
+│   │   ├──dsa008.json
+│   │   ├──dsa009.json
+│   │   ├──dsa010.json
 ├── frontend/
 │   ├── Dockerfile
 │   ├── public-html/  # HTML code
-│   ├── ...   # Other files
 ├── proxy/
 │   ├── Dockerfile
 │   ├── nginx.conf
-│   ├── ...   # Other files
 ```
 
 ## How to Run the Project
