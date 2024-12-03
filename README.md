@@ -1,3 +1,12 @@
+# Integrantes
+- Luis Felipe Garcia 2343105
+- Keyner Meneses 2341611
+- Mateo Noguera 2342673
+
+# Video
+Enlace: 
+
+
 # Disk scheduling algorithms
 
 Here, an Nginx proxy is set up to route requests to a scheduling service, which is responsible for handling different policies. This ensures efficient routing and load balancing between services.
