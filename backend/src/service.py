@@ -2,12 +2,13 @@ from flask import Flask, request, jsonify
 
 from flask_cors import CORS
 
+from fcfs import fcfs
+from sstf import sstf
+from scan import scan
+from cscan import cscan
+
 app = Flask(__name__)
 CORS(app)
-
-from fcfs import fcfs
-from look import look
-from clook import clook
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -48,6 +49,12 @@ def sched():
   
   if algorithm == 1:  ## FCFS
     result = fcfs(arm, requests)
+  elif algorithm == 2:  # SSTF
+      result = sstf(arm, requests)
+  elif algorithm == 3:  # SCAN
+      result = scan(arm, requests, tracks)
+  elif algorithm == 4:  # CSCAN
+      result = cscan(arm, requests, tracks)
   elif algorithm  == 5: ## LOOK
     result = look(arm, requests)
   elif algorithm == 6: ## CLOOK
@@ -58,11 +65,8 @@ def sched():
   return jsonify({
     "result": result
   }), 200
-    
-  
-  
 
-  
+
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=8000)
 
