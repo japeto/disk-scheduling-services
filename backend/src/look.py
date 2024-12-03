@@ -13,7 +13,7 @@ def look(tracks, arm_position, lrequests, debug= False):
 
     olders = []
     minors = []
-    ignored = []
+    ignored = 0
     
     for x in lrequests:
         if x >= 0 and x <= tracks:
@@ -22,7 +22,7 @@ def look(tracks, arm_position, lrequests, debug= False):
             else:
                 minors.append(x)
         else:
-            ignored.append(x)
+            ignored += 1
 
     olders.sort()
     minors.sort(reverse=True)
@@ -34,11 +34,10 @@ def look(tracks, arm_position, lrequests, debug= False):
         current_pos=a_request
         if debug: print("> ", current_pos ,"seeked")
     
-    average = distance / (n - len(ignored)) 
+    average = distance / (n - ignored) 
 
     return {
         "sequence": [arm_position] + request,
         "average": average,
         "distance": distance,
-        "ignored": ignored
     }
