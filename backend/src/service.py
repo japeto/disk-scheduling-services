@@ -2,10 +2,16 @@ from flask import Flask, request, jsonify
 
 from flask_cors import CORS
 
+from fcfs import fcfs
+from sstf import sstf
+from scan import scan
+from cscan import cscan
+
+
+
 app = Flask(__name__)
 CORS(app)
 
-from fcfs import fcfs
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -38,20 +44,31 @@ def help():
   
 @app.route("/sched", methods=['POST'])
 def sched():
-  data = request.get_json()
-  algorithm = data.get("algorithm")
-  tracks = data.get("tracks")
-  arm = data.get("arm")
-  requests = data.get("requests")
-  
-  if algorithm == 1:  ## FCFS
-    result = fcfs(arm, requests)
-  else:
-    return jsonify({"error": "Invalid algorithm"}), 400
-  
-  return jsonify({
-    "result": result
-  }), 200
+    try:
+        data = request.get_json()
+        algorithm = data.get("algorithm")
+        tracks = data.get("tracks")
+        arm = data.get("arm")
+        requests = data.get("requests")
+
+        if not all([algorithm, tracks, arm, requests]):
+            return jsonify({"error": "Missing required fields"}), 400
+
+        if algorithm == 1:  # FCFS
+            result = fcfs(arm, requests)
+        elif algorithm == 2:  # SSTF
+            result = sstf(arm, requests)
+        elif algorithm == 3:  # SCAN
+            result = scan(arm, requests, tracks)
+        elif algorithm == 4:  # CSCAN
+            result = cscan(arm, requests, tracks)
+        else:
+            return jsonify({"error": "Invalid algorithm"}), 400
+
+        return jsonify({"result": result}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
     
   
   
