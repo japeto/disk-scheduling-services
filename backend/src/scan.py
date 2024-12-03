@@ -12,23 +12,26 @@ def scan(tracks, arm_position, lrequests, debug=False):
   n = len(lrequests)
   current_pos = arm_position
 
-  olders = [x for x in lrequests if x > arm_position]
+  olders = [x for x in lrequests if x > arm_position and x < tracks]
   olders.sort()
 
-  minors = [x for x in lrequests if x < arm_position]
+  minors = [x for x in lrequests if x < arm_position and x > 0]
   minors.sort(reverse=True)
 
   request = olders + [tracks] + minors
 
+  sequence = [current_pos]
+
   for a_request in request:
     distance += abs(a_request-current_pos)
     current_pos=a_request
+    sequence.append(current_pos)
     if debug: print("> ", current_pos ,"seeked")
   
   average = distance / n
 
   return {
-    "sequence": [arm_position] + request,
+    "sequence": sequence,
     "average": average,
     "distance": distance,
   }
