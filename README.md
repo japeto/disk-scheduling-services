@@ -4,7 +4,7 @@
 - Mateo Noguera 2342673
 
 # Video
-Enlace: 
+Enlace: https://drive.google.com/file/d/1wnHHFWy7BCYL4YxxStfhmqwdabN_BaOo/view?usp=drive_link
 
 
 # Disk scheduling algorithms
