@@ -6,13 +6,15 @@ app = Flask(__name__)
 CORS(app)
 
 from fcfs import fcfs
+from look import look
+from clook import clook
 
 @app.route("/", methods=['GET'])
 def hello():
   return {
     "message": "use /usage to get information"
   }
-  
+
 @app.route("/usage", methods=['GET'])
 def help():
   return {
@@ -35,7 +37,7 @@ def help():
       "description": "This endpoint perform disk scheduling algorithms"
     }
   }
-  
+
 @app.route("/sched", methods=['POST'])
 def sched():
   data = request.get_json()
@@ -46,6 +48,10 @@ def sched():
   
   if algorithm == 1:  ## FCFS
     result = fcfs(arm, requests)
+  elif algorithm  == 5: ## LOOK
+    result = look(arm, requests)
+  elif algorithm == 6: ## CLOOK
+    result = clook(arm, requests)
   else:
     return jsonify({"error": "Invalid algorithm"}), 400
   
