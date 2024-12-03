@@ -9,7 +9,7 @@ def cscan(tracks, arm_position, lrequests, debug=False):
   """
 
   distance=0
-  n = len(lrequests)
+  n = len([x for x in lrequests if 0 < x < tracks])
   current_pos = arm_position
 
   lrequests.sort()

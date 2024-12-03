@@ -9,7 +9,7 @@ def scan(tracks, arm_position, lrequests, debug=False):
   """
 
   distance=0
-  n = len(lrequests)
+  n = len([x for x in lrequests if 0 < x < tracks])
   current_pos = arm_position
 
   olders = [x for x in lrequests if x > arm_position and x < tracks]
