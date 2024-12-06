@@ -1,19 +1,19 @@
 
 from heapq import *
 
-def cscan(requests, tracks, initial_position):
+def cscan(arm_position, lrequests, tracks, debug=False):
 
     # order the requests
     requests.sort()
 
     # split the requests into two groups based on the arm position
-    left_requests = [r for r in requests if r < initial_position]
-    right_requests = [r for r in requests if r >= initial_position]
+    left_requests = [r for r in requests if r < arm_position]
+    right_requests = [r for r in requests if r >= arm_position]
 
     # move to right
     distance = 0
-    current_position = initial_position
-    sequence = [initial_position]
+    current_position =arm_position 
+    sequence = [arm_position]
 
     # get the distance to the right
     for request in right_requests:
